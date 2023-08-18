@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
 import '../../src/App.css';
-import logo from '../../src/images/logo.png'
+// import logo from '../../src/images/logo.png'
 import {
   Box,
   Button,
@@ -25,7 +25,7 @@ const ConsentForm = () => {
     <Container className="consent-form">
       <Box p={4} bg="gray.100" borderRadius="md">
         <Box  textAlign='left'>
-          <img src={logo} width='300'/>
+          {/* <img src={logo} width='300'/> */}
         </Box>
         <Formik
           initialValues={{
