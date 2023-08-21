@@ -6,7 +6,7 @@ import { Flex } from '@chakra-ui/react'
 function Home(){
     return(
         <Flex align='center' justify='center' rowGap={50}>
-            <div style={{border: '1px solid red'}}> 
+            <div style={{margin: '150px 20px'}}> 
                 <WebcamVideo />
             </div>
              <div> 
