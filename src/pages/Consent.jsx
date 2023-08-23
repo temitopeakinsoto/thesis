@@ -17,7 +17,6 @@ import {
 const ConsentForm = () => {
 
   const handleSubmit = (values) => {
-    // You can perform any actions with the form values here
     console.log('Form values:', values);
   };
 
@@ -29,11 +28,7 @@ const ConsentForm = () => {
         </Box>
         <Formik
           initialValues={{
-            field1: '',
-            field2: '',
-            field3: '',
-            field4: '',
-            field5: '',
+            termsandcondition: '',
             signatureParticipant: '',
             dateParticipant: '',
             signatureInvestigator: '',
@@ -175,6 +170,19 @@ const ConsentForm = () => {
                       borderRight="none"
                     />
                   </Text>
+                </FormControl>
+                <FormControl>
+                <Input
+                      type="checkbox"
+                      name="termsandcondition"
+                      value={values.termsandcondition}
+                      onChange={handleChange}
+                      border="none"
+                      borderBottom="1px dotted"
+                      borderTop="none"
+                      borderLeft="none"
+                      borderRight="none"
+                    />
                 </FormControl>
               </Stack>
               
