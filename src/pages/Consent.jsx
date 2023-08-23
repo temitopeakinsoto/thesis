@@ -18,29 +18,33 @@ import {
 
 const ConsentForm = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const today = new Date();
+  const formattedToday = `${today.getFullYear()}-${(today.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${today.getDate().toString().padStart(2, "0")}`;
 
   const handleSubmit = (values) => {
     console.log("Form values:", values);
   };
 
   return (
-    <Container className="consent-form">
+    <Container>
       <Box p={4} bg="gray.100" borderRadius="md">
-        <Box textAlign="left">
-          <img src={logo} width="300" />
-        </Box>
         <Formik
           initialValues={{
             termsandcondition: "",
             signatureParticipant: "",
-            dateParticipant: "",
+            dateParticipant: formattedToday,
             signatureInvestigator: "",
-            dateInvestigator: "",
+            dateInvestigator: formattedToday,
           }}
           onSubmit={handleSubmit}
         >
           {({ values, handleChange }) => (
-            <Form>
+            <Form className="consent-form">
+              <Box textAlign="left">
+                <img src={logo} width="300" />
+              </Box>
               <br />
               <Heading mb={4}>{WORDS.HEADING}</Heading>
               <Heading mb={4}>{WORDS.RESEARCHTITLE} </Heading>

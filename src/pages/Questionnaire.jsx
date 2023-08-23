@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Formik, Form } from "formik";
-import { Q, QUESTIONNAIRE } from "../words";
+import { QUESTIONNAIRE } from "../words";
 import "../../src/App.css";
+import logo from "../../src/images/logo.png";
+
 import {
   Box,
   Button,
@@ -50,6 +52,9 @@ const Questionnaire = () => {
         >
           {({ values, handleChange }) => (
             <Form className="consent-form">
+              <Box textAlign="left">
+                <img src={logo} width="300" />
+              </Box>
               <br />
               <Heading mb={4}>{QUESTIONNAIRE.HEADING}</Heading>
               <Heading mb={4}>{QUESTIONNAIRE.TITLE}</Heading>
