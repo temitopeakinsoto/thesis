@@ -28,7 +28,7 @@ const ConsentForm = () => {
   };
 
   return (
-    <Container>
+    <Container className="consent-form">
       <Box p={4} bg="gray.100" borderRadius="md">
         <Formik
           initialValues={{
@@ -41,16 +41,26 @@ const ConsentForm = () => {
           onSubmit={handleSubmit}
         >
           {({ values, handleChange }) => (
-            <Form className="consent-form">
+            <Form style={{ border: "5px solid white" }}>
               <Box textAlign="left">
                 <img src={logo} width="300" />
               </Box>
               <br />
-              <Heading mb={4}>{WORDS.HEADING}</Heading>
-              <Heading mb={4}>{WORDS.RESEARCHTITLE} </Heading>
-              <Heading mb={4}> {WORDS.FORMTITLE}</Heading>
+              <Heading fontSize={["xl", "2xl", "3xl", "4xl"]} mb={4}>
+                {WORDS.HEADING}
+              </Heading>
+              <Heading fontSize={["xl", "2xl", "3xl", "4xl"]} mb={4}>
+                {WORDS.RESEARCHTITLE}{" "}
+              </Heading>
+              <Heading fontSize={["xl", "2xl", "3xl", "4xl"]} mb={4}>
+                {" "}
+                {WORDS.FORMTITLE}
+              </Heading>
               <Spacer />
-              <Stack spacing={15}>
+              <Text mb={4} as="h3">
+                (The UH protocol number: SPECS/PGT/UH/05457)
+              </Text>
+              <Stack spacing={{ base: 4, md: 8 }}>
                 {WORDS.FORMTITLE2}
 
                 <FormControl mb={4}>
@@ -178,16 +188,28 @@ const ConsentForm = () => {
                       setIsChecked(e.target.checked);
                     }}
                   />
+                  By clicking this checkbox, you do give consent for
+                  participating in this study{" "}
                 </FormControl>
               </Stack>
 
-              <Text>
-                Name of (principal) investigator:{" "}
-                <b> TEMITOPE SAMSON AKINSOTO</b>
+              <Text mt={50}>
+                Principal investigator: <b> TEMITOPE SAMSON AKINSOTO</b>
               </Text>
 
-              <Link to="/app">
-                <input disabled={!isChecked} type="submit" value="Continue" />
+              <Link to="/">
+                {" "}
+                <Button type="submit" colorScheme="teal" size="lg" mr={20}>
+                  Back
+                </Button>
+              </Link>
+              <Link to="/start">
+                <input
+                  className="consent-submit"
+                  disabled={!isChecked}
+                  type="submit"
+                  value="Continue"
+                />
               </Link>
             </Form>
           )}

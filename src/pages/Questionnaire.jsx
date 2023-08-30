@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import { QUESTIONNAIRE } from "../words";
@@ -57,7 +58,11 @@ const Questionnaire = () => {
               </Box>
               <br />
               <Heading mb={4}>{QUESTIONNAIRE.HEADING}</Heading>
+              <Text mb={4} as="h3">
+                (The UH protocol number: SPECS/PGT/UH/05457)
+              </Text>
               <Heading mb={4}>{QUESTIONNAIRE.TITLE}</Heading>
+
               <Spacer />
               <Stack spacing={15}>
                 <Heading>Questionnaire</Heading>
@@ -84,7 +89,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10} mr={10} textAlign="justify">
                     Please tell us your age
                     <Input
                       type="number"
@@ -92,7 +97,7 @@ const Questionnaire = () => {
                       value={values.age}
                       onChange={handleChange}
                       border="none"
-                      borderBottom="1px dotted"
+                      borderBottom="1px solid gray"
                       borderTop="none"
                       borderLeft="none"
                       borderRight="none"
@@ -381,7 +386,10 @@ const Questionnaire = () => {
               </Text>
 
               <Button type="submit" colorScheme="teal" size="xs">
-                Button
+                <Link to="/">Back</Link>
+              </Button>
+              <Button>
+                <Link to="/consent">Continue</Link>
               </Button>
             </Form>
           )}
