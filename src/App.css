@@ -2,37 +2,83 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+select {
+  padding: 4px 70px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.topRight {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 200px;
+  height: 200px;
+  padding: 5px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.frame {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  background-color: lightblue;
+  padding: 5px;
+}
+
+button {
+  width: 120px;
+  margin: 10px auto;
+  padding: 10px;
+  color: black;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid green;
+}
+
+.consent-submit {
+  width: 120px;
+  margin: 10px auto;
+  padding: 10px;
+  color: black;
+  background-color: white;
+  font-size: 14px;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.consent-form {
+  border: 1px solid lightgray;
+  text-align: center;
+  margin: 30px 20px;
+  margin: auto;
+  line-height: 24px; /* Adjust line-height for better readability on mobile */
+  -webkit-box-shadow: 0 10px 6px -6px lightgray;
+  -moz-box-shadow: 0 10px 6px -6px lightgray;
+  box-shadow: 0 10px 6px -6px lightgray;
+  max-width: 900px;
+
+  padding: 20px 30px;
+}
+
+@media (max-width: 768px) {
+  /* Apply these styles only for screens with a max width of 768px (typical mobile devices) */
+  .consent-form {
+    margin: 20px; /* Adjust margin further for smaller screens */
+    padding: 10px; /* Adjust padding further for smaller screens */
+    line-height: 20px; /* Further adjust line-height for better readability on smaller screens */
+    display: flex;
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+
+  button {
+    width: 40%;
+    margin: 10px auto;
+    padding: 10px;
+    color: black;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid green;
   }
 }
