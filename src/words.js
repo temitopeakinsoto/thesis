@@ -1,6 +1,7 @@
 const WORDS = {
   HEADING: `UNIVERSITY OF HERTFORDSHIRE ETHICS COMMITTEE FOR STUDIES INVOLVING THE USE OF HUMAN PARTICIPANTS ('ETHICS COMMITTEE')`,
-  RESEARCHTITLE: `TITLE: WEB-BASED EMOTION RECOGNITION SYSTEM FOR <br /> E-LEARNING ENGAGEMENT MANAGEMENT",
+  RESEARCHTITLE: `TITLE: WEB-BASED EMOTION RECOGNITION SYSTEM FOR 
+                     E-LEARNING ENGAGEMENT MANAGEMENT",
             FORMTITLE: "PARTICIPANT'S CONSENT FORM`,
 
   FORMTITLE2: "FORM EC3 CONSENT FORM FOR STUDIES INVOLVING HUMAN PARTICIPANTS",
@@ -69,7 +70,7 @@ export const QUESTIONNAIRE = {
   HEADING: `UNIVERSITY OF HERTFORDSHIRE ETHICS COMMITTEE FOR STUDIES
               INVOLVING THE USE OF HUMAN PARTICIPANTS (‘ETHICS COMMITTEE’)`,
 
-  TITLE: `TITLE: WEB-BASED EMOTION RECOGNITION SYSTEM FOR <br />
+  TITLE: `TITLE: WEB-BASED EMOTION RECOGNITION SYSTEM FOR
               E-LEARNING ENGAGEMENT MANAGEMENT`,
 
   INTRODUCTION: `Thank you for your interest in participating in this survey
@@ -91,6 +92,67 @@ export const QUESTIONNAIRE = {
                 today’s date and current time. (for example, if your name is
                 John Doe and today’s date is 06th August and the current
                 time is 13:30 PM your code would be JD06081330`,
+};
+
+export const INFORMATION = {
+  HEADING: `UNIVERSITY OF HERTFORDSHIRE ETHICS COMMITTEE FOR STUDIES INVOLVING THE
+             USE OF HUMAN PARTICIPANTS 
+             (ETHICS COMMITTEE)`,
+
+  TITLE: `PARTICIPANT INFORMATION SHEET`,
+
+  INTRODUCTION: `You are being invited to take part in a study. Before you decide
+                whether to do so, it is important that you understand the study that
+                is being undertaken and what your involvement will include. Please
+                take the time to read the following information carefully and discuss
+                it with others if you wish. Do not hesitate to ask us anything that is
+                not clear or for any further information you would like to help you
+                make your decision. Please do take your time to decide whether or not
+                you wish to take part. The University's regulation, UPR RE01, 'Studies
+                Involving the Use of Human Participants' can be accessed via this
+                link:`,
+
+  STUDYTITLE: `WEB-BASED EMOTION RECOGNITION SYSTEM FOR E-LEARNING ENGAGEMENT
+    MANAGEMENT`,
+
+  LINK: `https://www.herts.ac.uk/about-us/governance/university-policies-and-regulations-uprs/uprs`,
+
+  PURPOSEOFSTUDY: `The study involves the development and evaluation of an emotion
+                    recognition system capable of recognizing and classifying facial
+                    expressions/emotions in real-time during e-learning activities. The
+                    study aims to gain insights into learners' emotional states during
+                    educational activities using facial expressions. By understanding
+                    learners' emotional engagement, we seek to enhance e-learning
+                    experiences and provide valuable feedback for tailored interventions,
+                    ultimately improving learning outcomes.`,
+  QUESTION4: `Do I have to take part?`,
+  ANSWER4: `It is completely up to you whether or not you decide to take part in
+            this study. If you do decide to take part you will be given this
+            information sheet to keep and be asked to sign a consent form.
+            Agreeing to join the study does not mean that you have to complete it.
+            You are free to withdraw at any stage without giving a reason. A
+            decision to withdraw at any time, or a decision not to take part at
+            all, will not affect any treatment/care that you may receive (should
+            this be relevant).`,
+  QUESTION5: `Are there any age or other restrictions that may prevent me from
+                participating?`,
+  ANSWER5: `This study is for individuals who are aged 18 and above and hence not
+    suitable for minors.`,
+  QUESTION6: `6 How long will my part in the study take?`,
+  ANSWER6: `If you decide to take part in this study, you will be involved in it
+  for <em>not more than 5 -10 minutes`,
+  QUESTION7: `7 What will happen to me if I take part?`,
+  ANSWER7: `a short video clip, not longer than 5 minutes, which will be played
+            for you to watch. The purpose of the video is to elicit emotions of
+            joy, laughter etc. While this video is being watched, the emotion
+            recognition system will collect and analyse facial expression data
+            through your computer's webcam. The different facial expressions
+            predicted by the app will be visible for you to see and decide if it
+            matches the actual facial expression/emotion showed by you. After
+            the completion of this session, you are free to exit the study as
+            your involvement in the study would have been completed. A
+            questionnaire with no more than 7-8 questions will be used to
+            capture your feedback about using the emotion recognition app.`,
 };
 
 export default WORDS;

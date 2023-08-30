@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from 'react';
-const url = 'http://localhost:5000/emotion'
+import React, { useState, useEffect } from "react";
+
+const url = "http://localhost:5000/emotion";
+const FRAME_INTERVAL = 5000; // Interval in milliseconds (5 seconds)
 
 const WebcamVideo = () => {
   const [emotionData, setEmotionData] = useState([]);
-  const [stream, setStream] = useState(null); 
+  const [stream, setStream] = useState(null);
+  const [timer, setTimer] = useState(0);
+
+  const handleStopStreaming = async () => {
+    try {
+      await fetch("http://localhost:5000/stop_streaming", {
+        method: "POST",
+      });
+      handleStopStream();
+    } catch (error) {
+      console.error("Error stopping streaming:", error);
+    }
+  };
 
   useEffect(() => {
-    // Start capturing video frames and sending them to the server
     const captureFramesAndSend = async () => {
-      const videoElement = document.getElementById('videoStream');
-      const canvasElement = document.createElement('canvas');
-      const canvasContext = canvasElement.getContext('2d');
+      const videoElement = document.getElementById("videoStream");
+      const canvasElement = document.createElement("canvas");
+      const canvasContext = canvasElement.getContext("2d");
 
       try {
         const constraints = { video: true };
@@ -19,39 +32,57 @@ const WebcamVideo = () => {
 
         const sendFramesToServer = async () => {
           // Capture a frame from the video stream and draw it on the canvas
-          canvasContext.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
-          const frameBlob = await new Promise(resolve => canvasElement.toBlob(resolve, 'image/jpeg'));
+          canvasContext.drawImage(
+            videoElement,
+            0,
+            0,
+            canvasElement.width,
+            canvasElement.height
+          );
+          const frameBlob = await new Promise((resolve) =>
+            canvasElement.toBlob(resolve, "image/jpeg")
+          );
 
           // Send the frame as a blob to the server
           const formData = new FormData();
-          formData.append('frames', frameBlob);
+          formData.append("frames", frameBlob);
 
           try {
             const response = await fetch(url, {
-              method: 'POST',
+              method: "POST",
               body: formData,
             });
 
             const data = await response.json();
             setEmotionData(data);
-
           } catch (error) {
-            console.error('Error processing emotion:', error);
+            console.error("Error processing emotion:", error);
           }
 
-          // Schedule the next frame capture and send
-          requestAnimationFrame(sendFramesToServer);
+          // Schedule the next frame capture and send after the interval
+          setTimeout(sendFramesToServer, FRAME_INTERVAL);
         };
 
         // Start sending frames to the server
         sendFramesToServer();
       } catch (error) {
-        console.error('Error accessing webcam:', error);
+        console.error("Error accessing webcam:", error);
       }
     };
 
     captureFramesAndSend();
-  }, [stream]);
+  }, []);
+
+  useEffect(() => {
+    // Update the timer every second
+    const timerInterval = setInterval(() => {
+      setTimer((prevTimer) => prevTimer + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timerInterval);
+    };
+  }, []);
 
   const handleStopStream = () => {
     // Stop the video stream when the stop button is clicked
@@ -62,22 +93,28 @@ const WebcamVideo = () => {
     }
   };
 
+  // console.log("Data from server is====> ", emotionData);
+
   return (
     <div>
-      <div >
+      <div style={{ position: "absolute", top: 20, right: 20 }}>
+        Time: {timer} seconds
+      </div>
+      <div>
         <video id="videoStream" width="560" height="500" autoPlay playsInline />
       </div>
-      <div >
+      <div>
         <h2>Emotion Results</h2>
         <ul>
           {emotionData.map((data, index) => (
             <li key={index}>
-              Frame {index + 1}: {data.emotion} (Probability: {data.probability ? data.probability.toFixed(2) : 'N/A'})
+              {data.emotion} (Probability:{" "}
+              {data.probability ? data.probability.toFixed(2) : "N/A"})
             </li>
           ))}
         </ul>
       </div>
-      <button onClick={handleStopStream}>Stop Streaming</button>
+      <button onClick={handleStopStreaming}>Stop Streaming</button>
     </div>
   );
 };
