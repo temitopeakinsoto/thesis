@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form } from "formik";
 import { QUESTIONNAIRE } from "../words";
@@ -16,23 +16,60 @@ import {
   Text,
   Spacer,
   Heading,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
 } from "@chakra-ui/react";
 
 const Questionnaire = () => {
+  const navigate = useNavigate();
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [formValues, setFormValues] = useState(null); // Define formValues
+
   const handleSubmit = async (values) => {
+    console.log("Form values:", values);
+    setFormValues(values); // Store form values
+    setIsConfirmationOpen(true);
+  };
+
+  const handleConfirmation = async () => {
     try {
+      // Send the stored formValues to the server
       const response = await axios.post(
         "http://localhost:5000/submit_form",
-        values
+        formValues
       );
+      console.log("Response from server:", response.data);
+
+      navigate("/success");
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
 
+  // const handleSubmit = async (values) => {
+  //   console.log("Form values:", values);
+
+  //   try {
+  //     // Send the data to the server
+  //     const response = await axios.post(
+  //       "http://localhost:5000/submit_form",
+  //       values
+  //     );
+  //     console.log("Response from server:", response.data);
+
+  //     navigate("/success");
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   }
+  // };
+
   return (
-    <Container>
-      <Box p={4} bg="gray.100" borderRadius="md">
+    <Container maxWidth={"900px"} pt={20}>
+      <Box p={[2, 4, 6, 8]} bg="gray.10" borderRadius="md">
         <Formik
           initialValues={{
             code: "",
@@ -52,28 +89,30 @@ const Questionnaire = () => {
           onSubmit={handleSubmit}
         >
           {({ values, handleChange }) => (
-            <Form className="consent-form">
+            <Form>
               <Box textAlign="left">
-                <img src={logo} width="300" />
+                <img src={logo} width={["300px", "350px", "400px"]} />
               </Box>
               <br />
-              <Heading mb={4}>{QUESTIONNAIRE.HEADING}</Heading>
-              <Text mb={4} as="h3">
+              <Heading size="md" mb={4} textAlign="center">
+                {QUESTIONNAIRE.HEADING}
+              </Heading>
+              <Text mb={4} as="h2" textAlign="center">
                 (The UH protocol number: SPECS/PGT/UH/05457)
               </Text>
-              <Heading mb={4}>{QUESTIONNAIRE.TITLE}</Heading>
+              <Heading size="md" mb={4} textAlign="center">
+                {QUESTIONNAIRE.TITLE}
+              </Heading>
 
               <Spacer />
               <Stack spacing={15}>
-                <Heading>Questionnaire</Heading>
-                <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
-                    {QUESTIONNAIRE.INTRODUCTION}
-                  </Text>
-                </FormControl>
+                <Heading size="md" textAlign="center">
+                  Questionnaire
+                </Heading>
+                <FormControl mb={4}>{QUESTIONNAIRE.INTRODUCTION}</FormControl>
 
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10}>
                     Please provide your anonymity Code
                     <Input
                       type="text"
@@ -89,7 +128,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} mr={10} textAlign="justify">
+                  <Text mt={10}>
                     Please tell us your age
                     <Input
                       type="number"
@@ -105,7 +144,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10}>
                     What is your gender
                     <select
                       name="gender"
@@ -132,7 +171,7 @@ const Questionnaire = () => {
                 </FormControl>
 
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10}>
                     What is your ethnicity/Race
                     <select
                       name="ethnicity"
@@ -173,7 +212,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10}>
                     Tell us your highest level of education:
                     <select
                       name="education"
@@ -206,7 +245,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10}>
                     How often do you engage in e-learning activities via online
                     platforms?{" "}
                     <select
@@ -233,7 +272,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10}>
                     On a scale of 1 - 10 (10 Being the highest), how would you
                     rate your overall experience with using the emotion
                     recognition app?
@@ -266,7 +305,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10}>
                     On a scale of 1 - 10 (10 Being the highest), How comfortable
                     were you using the emotion recognition system during the
                     session?
@@ -299,7 +338,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10} as="h6" size="xs">
                     On a scale of 1-10 (10 Being the highest), How accurately
                     did the system detect your emotional state/facial
                     expressions?{" "}
@@ -332,7 +371,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10}>
                     Were there any technical issues or challenges while using
                     the emotion recognition app? If yes, please specify
                     <Input
@@ -349,7 +388,7 @@ const Questionnaire = () => {
                   </Text>
                 </FormControl>
                 <FormControl mb={4}>
-                  <Text mt={10} textAlign="justify">
+                  <Text mt={10}>
                     Did the system provide timely and relevant feedback to your
                     emotional state based on your facial expression during the
                     session?
@@ -386,14 +425,36 @@ const Questionnaire = () => {
               </Text>
 
               <Button type="submit" colorScheme="teal" size="xs">
-                <Link to="/">Back</Link>
+                SUBMIT
               </Button>
-              <Button>
-                <Link to="/consent">Continue</Link>
-              </Button>
+              {/* <input type="submit" value="Enter" /> */}
             </Form>
           )}
         </Formik>
+        <>
+          <Modal
+            isOpen={isConfirmationOpen}
+            onClose={() => setIsConfirmationOpen(false)}
+            isCentered
+          >
+            <ModalOverlay marginX="10vw" width="80vw" />
+            <ModalContent>
+              <ModalHeader>Confirmation</ModalHeader>
+              <ModalBody>Are you sure you want to submit the form?</ModalBody>
+              <ModalFooter>
+                <Button colorScheme="teal" mr={3} onClick={handleConfirmation}>
+                  Yes
+                </Button>
+                <Button
+                  colorScheme="red"
+                  onClick={() => setIsConfirmationOpen(false)}
+                >
+                  No
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </>
       </Box>
     </Container>
   );
