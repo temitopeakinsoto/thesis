@@ -6,15 +6,6 @@ select {
   padding: 4px 70px;
 }
 
-.topRight {
-  position: fixed;
-  left: 0px;
-  top: 0px;
-  width: 200px;
-  height: 200px;
-  padding: 5px;
-}
-
 .frame {
   position: fixed;
   right: 0px;
@@ -42,11 +33,11 @@ button {
 }
 
 .video-container {
-  position: relative; /* Make the container relative for absolute positioning */
+  position: relative;
 }
 
 iframe {
-  position: absolute; /* Position the iframe absolutely within the container */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -71,7 +62,7 @@ iframe {
   text-align: center;
   margin: 30px 20px;
   margin: auto;
-  line-height: 24px; /* Adjust line-height for better readability on mobile */
+  line-height: 24px;
   -webkit-box-shadow: 0 10px 6px -6px lightgray;
   -moz-box-shadow: 0 10px 6px -6px lightgray;
   box-shadow: 0 10px 6px -6px lightgray;
@@ -81,11 +72,10 @@ iframe {
 }
 
 @media (max-width: 768px) {
-  /* Apply these styles only for screens with a max width of 768px (typical mobile devices) */
   .consent-form {
-    margin: 20px; /* Adjust margin further for smaller screens */
-    padding: 10px; /* Adjust padding further for smaller screens */
-    line-height: 20px; /* Further adjust line-height for better readability on smaller screens */
+    margin: 20px;
+    padding: 10px;
+    line-height: 20px;
     display: flex;
     flex-direction: column;
   }
@@ -99,5 +89,6 @@ iframe {
     font-size: 14px;
     cursor: pointer;
     border: 1px solid green;
+    padding: 10px;
   }
 }
