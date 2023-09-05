@@ -7,19 +7,21 @@ import Questionnaire from "./pages/Questionnaire.jsx";
 import Home from "./pages/Home";
 import InformationSheet from "./pages/Information.jsx";
 import Start from "./pages/Start.jsx";
+import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   return (
     <Router>
-      <div>
+      <ChakraProvider>
         <Routes>
           <Route path="/" exact element={<InformationSheet />} />
           <Route path="/app" exact element={<Home />} />
           <Route path="/consent" element={<ConsentForm />} />
           <Route path="/start" element={<Start />} />
           <Route path="/questionnaire" element={<Questionnaire />} />
+          <Route path="/success" element={<Start />} />
         </Routes>
-      </div>
+      </ChakraProvider>
     </Router>
   );
 }
