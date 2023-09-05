@@ -1,25 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Box,
-  Text,
-  Container,
-  Heading,
-  Button,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Text, Container, Heading, Button } from "@chakra-ui/react";
 import logo from "../../src/images/logo.png";
 import { INFORMATION } from "../words";
 
 function InformationSheet() {
   return (
-    <Container className="consent-form" p={100}>
-      <Box textAlign="left" mb={80}>
-        <img src={logo} width="300" />
+    <Container maxWidth={"900px"} pt={20} textAlign="center">
+      <Box textAlign="left">
+        <img src={logo} width={["300px", "350px", "400px"]} />
       </Box>
-      <Text textAlign="center" as="h3">
+      <Heading size="md" mb={4} mt={4}>
         {INFORMATION.HEADING}
-      </Text>
+      </Heading>
       <Text mb={4} as="h3">
         (The UH protocol number: SPECS/PGT/UH/05457)
       </Text>
