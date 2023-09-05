@@ -1,23 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 const url = "http://localhost:5000/emotion";
-const FRAME_INTERVAL = 5000; // Interval in milliseconds (5 seconds)
+const FRAME_INTERVAL = 1000; // Interval in milliseconds (1.s5 seconds)
 
 const WebcamVideo = () => {
   const [emotionData, setEmotionData] = useState([]);
-  const [stream, setStream] = useState(null);
-  const [timer, setTimer] = useState(0);
-
-  const handleStopStreaming = async () => {
-    try {
-      await fetch("http://localhost:5000/stop_streaming", {
-        method: "POST",
-      });
-      handleStopStream();
-    } catch (error) {
-      console.error("Error stopping streaming:", error);
-    }
-  };
 
   useEffect(() => {
     const captureFramesAndSend = async () => {
@@ -73,33 +60,8 @@ const WebcamVideo = () => {
     captureFramesAndSend();
   }, []);
 
-  useEffect(() => {
-    // Update the timer every second
-    const timerInterval = setInterval(() => {
-      setTimer((prevTimer) => prevTimer + 1);
-    }, 1000);
-
-    return () => {
-      clearInterval(timerInterval);
-    };
-  }, []);
-
-  const handleStopStream = () => {
-    // Stop the video stream when the stop button is clicked
-    if (stream) {
-      const tracks = stream.getTracks();
-      tracks.forEach((track) => track.stop());
-      setStream(null);
-    }
-  };
-
-  // console.log("Data from server is====> ", emotionData);
-
   return (
     <div>
-      <div style={{ position: "absolute", top: 20, right: 20 }}>
-        Time: {timer} seconds
-      </div>
       <div>
         <video id="videoStream" width="560" height="500" autoPlay playsInline />
       </div>
@@ -114,7 +76,6 @@ const WebcamVideo = () => {
           ))}
         </ul>
       </div>
-      <button onClick={handleStopStreaming}>Stop Streaming</button>
     </div>
   );
 };
